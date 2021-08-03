@@ -11,6 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EAuction.Products.Api.Data;
+using EAuction.Products.Api.Data.Abstractions;
+using EAuction.Products.Api.Repositories;
+using EAuction.Products.Api.Repositories.Abstractions;
+using EAuction.Products.Api.Settings;
+using Microsoft.Extensions.Options;
 
 namespace EAuction.Products.Api
 {
@@ -28,6 +34,13 @@ namespace EAuction.Products.Api
         {
 
             services.AddControllers();
+
+            services.Configure<ProductDatabaseSettings>(Configuration.GetSection(nameof(ProductDatabaseSettings)));
+            services.AddSingleton<IProductDatabaseSettings, ProductDatabaseSettings>(sp=>sp.GetRequiredService<IOptions<ProductDatabaseSettings>>().Value);
+
+            services.AddTransient<IProductContext, ProductContext>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EAuction.Products.Api", Version = "v1" });
