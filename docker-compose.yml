@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+
+  eauctiondb:
+    image: mongo
+
+  eauction.products.api:
+    image: ${DOCKER_REGISTRY-}eauctionproductsapi
+    build:
+      context: .
+      dockerfile: EAuction.Products.Api/Dockerfile
