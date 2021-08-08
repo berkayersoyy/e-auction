@@ -5,8 +5,18 @@ services:
   eauctiondb:
     image: mongo
 
+  rabbitmq:
+    image: rabbitmq:3-management
+
   eauction.products.api:
     image: ${DOCKER_REGISTRY-}eauctionproductsapi
     build:
       context: .
       dockerfile: EAuction.Products.Api/Dockerfile
+
+  eauction.sourcing.api:
+    image: ${DOCKER_REGISTRY-}eauctionsourcingapi
+    build:
+      context: .
+      dockerfile: EAuction.Sourcing.Api/Dockerfile
+

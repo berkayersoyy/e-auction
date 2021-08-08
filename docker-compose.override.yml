@@ -7,9 +7,14 @@ services:
     restart: always
     volumes:
       - ${WEBAPP_STORAGE_HOME}/site:/data/db
-      #- ./data:/data/db
     ports:
       - "27017:27017"
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
   eauction.products.api: 
     container_name: eauctionproductsapi
@@ -23,3 +28,18 @@ services:
     volumes:
       - ${HOME}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  eauction.sourcing.api:
+    container_name: eauctionsourcingapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "SourcingDatabaseSettings:ConnectionString=mongodb://eauctiondb:27017"
+      - "EventBus:HostName=rabbitmq"
+    depends_on:
+      - eauctiondb
+      - rabbitmq
+    volumes:
+      - ${HOME}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
+    ports:
+      - "8001:80"
