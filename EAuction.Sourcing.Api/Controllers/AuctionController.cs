@@ -11,6 +11,7 @@ using EventBusRabbitMQ.Core;
 using EventBusRabbitMQ.Events;
 using EventBusRabbitMQ.Producer;
 
+
 namespace EAuction.Sourcing.Api.Controllers
 {
     [Route("api/v1/[controller]")]
