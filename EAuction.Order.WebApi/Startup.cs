@@ -1,11 +1,17 @@
 using EAuction.Order.Application.IOC;
 using EAuction.Order.Infrastructure.IOC;
+using EAuction.Order.WebApi.Consumers;
+using EAuction.Order.WebApi.Extensions;
+using EventBusRabbitMQ;
+using EventBusRabbitMQ.Producer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 
 namespace EAuction.Order.WebApi
 {
@@ -42,6 +48,37 @@ namespace EAuction.Order.WebApi
             services.AddApplication();
 
             #endregion
+
+            #region EventBus Dependencies
+
+            services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+                var factory = new ConnectionFactory()
+                {
+                    HostName = Configuration["EventBus:HostName"]
+                };
+                if (Equals(!string.IsNullOrWhiteSpace(Configuration["EventBus:UserName"])))
+                {
+                    factory.UserName = Configuration["EventBus:UserName"];
+                }
+                if (Equals(!string.IsNullOrWhiteSpace(Configuration["EventBus:Password"])))
+                {
+                    factory.Password = Configuration["EventBus:Password"];
+                }
+
+                var retryCount = 5;
+                if (Equals(!string.IsNullOrWhiteSpace(Configuration["EventBus:RetryCount"])))
+                {
+                    retryCount = int.Parse(Configuration["EventBus:RetryCount"]);
+                }
+
+                return new DefaultRabbitMQPersistentConnection(factory, retryCount, logger);
+            });
+
+            services.AddSingleton<EventBusOrderCreateConsumer>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +101,8 @@ namespace EAuction.Order.WebApi
             {
                 endpoints.MapControllers();
             });
+
+            app.UseRabbitListener();
         }
     }
 }

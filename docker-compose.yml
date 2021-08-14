@@ -8,6 +8,9 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
 
+  eauctionsqldb:
+    image: mcr.microsoft.com/mssql/server
+
   eauction.products.api:
     image: ${DOCKER_REGISTRY-}eauctionproductsapi
     build:
