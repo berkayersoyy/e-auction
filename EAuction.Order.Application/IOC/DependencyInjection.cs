@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿
+using System.Reflection;
 using AutoMapper;
 using EAuction.Order.Application.Mapper;
 using EAuction.Order.Application.PipelineBehaviours;
@@ -16,9 +17,10 @@ namespace EAuction.Order.Application.IOC
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            services.AddTransient(typeof(IPipelineBehavior<,>),typeof(ValidationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>),typeof(PerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>),typeof(UnhandledExceptionBehaviour<,>));
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
 
             #region Configure Mapper
 
