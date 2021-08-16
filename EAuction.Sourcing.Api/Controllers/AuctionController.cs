@@ -125,12 +125,15 @@ namespace EAuction.Sourcing.Api.Controllers
         [HttpPost("TestEvent")]
         public ActionResult<OrderCreateEvent> TestEvent()
         {
-            OrderCreateEvent eventMessage = new OrderCreateEvent();
-            eventMessage.AuctionId = "dummy1";
-            eventMessage.ProductId = " dummy_product_1";
-            eventMessage.Price = 10;
-            eventMessage.Quantity = 100;
-            eventMessage.SellerUserName = "test@test1.com";
+            OrderCreateEvent eventMessage = new OrderCreateEvent
+            {
+                Id = "1",
+                AuctionId = "dummy1",
+                ProductId = "dummy_product_1",
+                Price = 10,
+                Quantity = 100,
+                SellerUserName = "test@test.com"
+            };
             try
             {
                 _eventBus.Publish(EventBusConstants.OrderCreateQueue,eventMessage);

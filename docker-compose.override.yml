@@ -50,3 +50,18 @@ services:
       - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
     ports:
       - "8001:80"
+
+  eauction.order.webapi:
+    container_name: eauctionorderapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrderConnection=Server=eauctionsqldb;Database=OrderDb;User Id=sa;Password=Odb12345678"
+      - "EventBus:HostName=rabbitmq"
+    depends_on:
+      - eauctionsqldb
+      - rabbitmq
+    volumes:
+      - ${HOME}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
+    ports:
+      - "8002:80"

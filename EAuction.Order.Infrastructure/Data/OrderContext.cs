@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 
 namespace EAuction.Order.Infrastructure.Data
 {
@@ -8,7 +9,7 @@ namespace EAuction.Order.Infrastructure.Data
         {
             
         }
-
+   
         public DbSet<Domain.Entities.Order> Orders { get; set; }
     }
 }

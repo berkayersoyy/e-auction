@@ -3,7 +3,6 @@ using EAuction.Order.Infrastructure.IOC;
 using EAuction.Order.WebApi.Consumers;
 using EAuction.Order.WebApi.Extensions;
 using EventBusRabbitMQ;
-using EventBusRabbitMQ.Producer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,13 +29,6 @@ namespace EAuction.Order.WebApi
 
             services.AddControllers();
 
-            #region Swagger Dependencies
-            services.AddSwaggerGen(c =>
-               {
-                   c.SwaggerDoc("v1", new OpenApiInfo { Title = "EAuction.Order.WebApi", Version = "v1" });
-               });
-            #endregion
-
             #region Infrastructure Dependencies
 
             services.AddInfrastructure(Configuration);
@@ -48,6 +40,8 @@ namespace EAuction.Order.WebApi
             services.AddApplication();
 
             #endregion
+
+            services.AddAutoMapper(typeof(Startup));
 
             #region EventBus Dependencies
 
@@ -79,6 +73,13 @@ namespace EAuction.Order.WebApi
             services.AddSingleton<EventBusOrderCreateConsumer>();
 
             #endregion
+
+            #region Swagger Dependencies
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EAuction.Order.WebApi", Version = "v1" });
+            });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,8 +92,6 @@ namespace EAuction.Order.WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EAuction.Order.WebApi v1"));
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -103,6 +102,7 @@ namespace EAuction.Order.WebApi
             });
 
             app.UseRabbitListener();
+
         }
     }
 }

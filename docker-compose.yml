@@ -23,3 +23,10 @@ services:
       context: .
       dockerfile: EAuction.Sourcing.Api/Dockerfile
 
+
+  eauction.order.webapi:
+    image: ${DOCKER_REGISTRY-}eauctionorderwebapi
+    build:
+      context: .
+      dockerfile: EAuction.Order.WebApi/Dockerfile
+
