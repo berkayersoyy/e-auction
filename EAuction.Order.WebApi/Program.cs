@@ -17,6 +17,7 @@ namespace EAuction.Order.WebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).UseDefaultServiceProvider(opt => opt.ValidateScopes = false);
+                });
+            //.UseDefaultServiceProvider(opt => opt.ValidateScopes = false)
     }
 }

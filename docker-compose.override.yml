@@ -9,12 +9,14 @@ services:
       - ${WEBAPP_STORAGE_HOME}/site:/data/db
     ports:
       - "27017:27017"
+
   rabbitmq:
     container_name: rabbitmq
     restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
+
   eauctionsqldb:
     container_name: eauctionsqldb
     ports:
@@ -65,3 +67,17 @@ services:
       - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
     ports:
       - "8002:80"
+
+  eauction.apigateway:
+    container_name: eauctionapigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - eauction.products.api
+      - eauction.sourcing.api
+      - eauction.order.webapi
+    volumes:
+      - ${HOME}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
+    ports:
+      - "5000:80"

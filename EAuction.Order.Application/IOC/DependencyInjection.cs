@@ -1,5 +1,4 @@
-﻿
-using System.Reflection;
+﻿using System.Reflection;
 using AutoMapper;
 using EAuction.Order.Application.Mapper;
 using EAuction.Order.Application.PipelineBehaviours;
@@ -14,7 +13,7 @@ namespace EAuction.Order.Application.IOC
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(),ServiceLifetime.Transient);
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
 
