@@ -1,0 +1,131 @@
+{
+  "Routes": [
+    {
+      //Producst API
+      "DownstreamPathTemplate": "/api/v1/Products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionproductsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Products",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Products/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionproductsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Products/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    //Sourcing API
+
+    //-Auction
+    {
+      "DownstreamPathTemplate": "/api/v1/Auction",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionsourcingapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Auction",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Auction/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionsourcingapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Auction/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Auction/CompleteAuction/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionsourcingapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Auction/CompleteAuction/{id}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //-Bid
+    {
+      "DownstreamPathTemplate": "/api/v1/Bid",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionsourcingapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Bid",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Bid/GetBidsByAuctionId/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionsourcingapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Bid/GetBidsByAuctionId/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Bid/GetBidsByAuctionId/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionsourcingapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Bid/GetWinnerBid/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Order API
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/GetOrdersByUserName/{userName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionorderapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Order/GetOrdersByUserName/{userName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Order",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eauctionorderapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/Order",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}
