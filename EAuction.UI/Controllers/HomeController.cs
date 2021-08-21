@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EAuction.Core.Entities;
 using EAuction.UI.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +29,32 @@ namespace EAuction.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel loginModel)
+        public async Task<IActionResult> Login(LoginViewModel loginModel,string returnUrl)
         {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                if (user!=null)
+                {
+                    await _signInManager.SignOutAsync();
+                    var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password,false,false);
+                    if (result.Succeeded)
+                    {
+                        //return RedirectToAction("Index");
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Email address is not valid or password");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("","Email address is not valid or password");
+                }
+            }
             return View();
         }
         public IActionResult Signup()
@@ -72,6 +97,12 @@ namespace EAuction.UI.Controllers
                 }
             }
             return View(signupModel);
+        }
+
+        public IActionResult Logout()
+        {
+            _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
         }
     }
 }
