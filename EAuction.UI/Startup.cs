@@ -1,5 +1,7 @@
+using System;
 using EAuction.Core.Entities;
 using EAuction.Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +29,30 @@ namespace EAuction.UI
             #endregion
 
             #region Identity Configuration
-            services.AddIdentity<AppUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<WebAppContext>();
+            services.AddIdentity<AppUser, IdentityRole>(opt =>
+            {
+                opt.Password.RequiredLength = 4;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<WebAppContext>();
+
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options =>
+            //    {
+            //        options.Cookie.Name = "My Cookie";
+            //        options.LoginPath = "Home/Login";
+            //        options.LogoutPath = "Home/Logout";
+            //        options.ExpireTimeSpan = TimeSpan.FromDays(3);
+            //        options.SlidingExpiration = false;
+            //    });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Home/Login";
+                options.LogoutPath = $"/Home/Logout";
+            });
             #endregion
 
             #region Project Configuration
@@ -52,6 +77,7 @@ namespace EAuction.UI
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
