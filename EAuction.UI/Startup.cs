@@ -1,7 +1,9 @@
-using System;
 using EAuction.Core.Entities;
+using EAuction.Core.Repositories;
+using EAuction.Core.Repositories.Abstractions;
 using EAuction.Infrastructure.Data;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using EAuction.Infrastructure.Repositories;
+using EAuction.Infrastructure.Repositories.Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -38,16 +40,6 @@ namespace EAuction.UI
                 opt.Password.RequireDigit = false;
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<WebAppContext>();
 
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(options =>
-            //    {
-            //        options.Cookie.Name = "My Cookie";
-            //        options.LoginPath = "Home/Login";
-            //        options.LogoutPath = "Home/Logout";
-            //        options.ExpireTimeSpan = TimeSpan.FromDays(3);
-            //        options.SlidingExpiration = false;
-            //    });
-
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Home/Login";
@@ -58,7 +50,14 @@ namespace EAuction.UI
             #region Project Configuration
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc();
-            services.AddRazorPages(); 
+            services.AddRazorPages();
+            #endregion
+
+            #region Dependencies
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
             #endregion
         }
 
@@ -81,6 +80,8 @@ namespace EAuction.UI
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -37,9 +37,6 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
                     <div class="info">
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -56,14 +53,53 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>Auction Operations</p>
-                                <i class="fas fa-angel-left right"></i>
-                            </a>
-                        </li>
+                        with font-awesome or any other icon font library -->
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Auction Operations</p>
+                                    <i class="fas fa-angel-left right"></i>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a asp-controller="Auction" asp-action="Index" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Auction List</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Auction" asp-action="Create" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Auction Create</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="Home" asp-action="Logout" class="nav-link">
+                                    <i class="far fa-user nav-icon"></i>
+                                    <p>Logout</p>
+                                </a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Signup">
+                                    <i class="nav-icon far fa-user"></i>
+                                    <p>Sign Up</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Login">
+                                    <i class="nav-icon far fa-user"></i>
+                                    <p>Login</p>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
