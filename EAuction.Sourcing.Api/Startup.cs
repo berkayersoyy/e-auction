@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using EAuction.Sourcing.Api.Data;
 using EAuction.Sourcing.Api.Data.Abstractions;
+using EAuction.Sourcing.Api.Hubs;
 using EAuction.Sourcing.Api.Repositories;
 using EAuction.Sourcing.Api.Repositories.Abstractions;
 using EAuction.Sourcing.Api.Settings;
@@ -84,6 +85,8 @@ namespace EAuction.Sourcing.Api
             services.AddSingleton<EventBusRabbitMQProducer>();
 
             #endregion
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,6 +105,7 @@ namespace EAuction.Sourcing.Api
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<AuctionHub>("/auctionhub");
                 endpoints.MapControllers();
             });
         }

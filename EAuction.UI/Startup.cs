@@ -4,6 +4,7 @@ using EAuction.Core.Repositories.Abstractions;
 using EAuction.Infrastructure.Data;
 using EAuction.Infrastructure.Repositories;
 using EAuction.Infrastructure.Repositories.Base;
+using EAuction.UI.Clients;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -57,6 +58,10 @@ namespace EAuction.UI
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+
+            services.AddHttpClient();
+            services.AddHttpClient<ProductClient>();
+            services.AddHttpClient<AuctionClient>();
 
             #endregion
         }

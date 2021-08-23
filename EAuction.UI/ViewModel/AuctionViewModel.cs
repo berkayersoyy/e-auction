@@ -6,7 +6,11 @@ namespace EAuction.UI.ViewModel
 {
     public class AuctionViewModel
     {
-        public int Id { get; set; }
+        public AuctionViewModel()
+        {
+            IncludedSellers = new List<string>();
+        }
+        public string Id { get; set; }
         [Required(ErrorMessage = "Please fill Name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Please fill Description")]
