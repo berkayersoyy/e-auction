@@ -57,7 +57,7 @@ namespace EAuction.Sourcing.Api.Controllers
         public async Task<ActionResult<Auction>> CreateAuction([FromBody] Auction auction)
         {
             await _auctionRepository.Create(auction);
-            return CreatedAtRoute("GetAuction", new { id = auction.Id, auction });
+            return CreatedAtRoute("GetAuction", new { id = auction.Id },auction);
         }
         [HttpPut]
         [ProducesResponseType(typeof(Auction), (int)HttpStatusCode.OK)]
