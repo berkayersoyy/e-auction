@@ -5,6 +5,7 @@ An auction application that I created with .Net 5 and microservices architecture
 </br>
 
 # 🚀 Building and Running for Production
+
     ```
     docker-compose up -d --build
     ```
