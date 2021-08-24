@@ -42,7 +42,28 @@ Docker Compose establishment with all microservices on docker;
 *  Containerization of databases
 *  Override Environment variables
 
-
+# Project Structure
+</br>
+src
+├── ApiGateway
+|   └── EAuction.ApiGateway
+├── Services                    
+│   ├── Common
+|   |   └── EventBustRabbitMQ
+|   ├── Order
+|   |   ├── EAuction.Order.Application
+|   |   ├── EAuction.Order.Domain
+|   |   ├── EAuction.Order.Infrastructure
+|   |   └── EAuction.Order.Api
+│   ├── Product
+|   |   └── EAuction.Products.Api
+│   └── Sourcing  
+|       └── EAuction.Sourcing.Api
+└── WebApp
+    ├── EAuction.Core
+    ├── EAuction.Infrastructure
+    └── EAuction.UI
+</br>
 # 🚀 Building and Running for Production
 
 1. Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
