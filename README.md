@@ -4,6 +4,37 @@ An auction application that I created with .Net 5 and microservices architecture
 
 </br>
 
+# Whats Including In This Repository
+
+Product microservice which includes;
+*  ASP.NET Core Web API application
+*  REST API principles, CRUD operations
+*  MongoDB database connection and containerization
+*  Repository Pattern Implementation
+*  Swagger Open API implementation
+
+Sourcing microservice whic includes;
+*  ASP.NET Web API application
+*  REST API principles, CRUD operations
+*  MongoDB database connection and containerization
+*  Repository Pattern Implementation
+*  Swagger Open API implementation
+*  ASP.NET gRPC Server application
+
+Microservices Communication
+*  Sync inter-service gRPC Communication
+*  Async Microservices Communication with RabbitMQ Message-Broker Service
+*  Using RabbitMQ Publish/Subscribe Topic Exchange Model
+
+Order Microservice
+*  Implementing DDD, CQRS, and Clean Architecture with using Best Practices
+*  Developing CQRS with using MediatR, FluentValidation and AutoMapper packages
+*  SqlServer database connection and containerization
+*  Using Entity Framework Core ORM and auto migrate to SqlServer when application startup
+
+API Gateway Ocelot Microservice
+*  Implement API Gateways with Ocelot
+
 # 🚀 Building and Running for Production
 
 1. Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
