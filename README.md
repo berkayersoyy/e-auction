@@ -43,7 +43,9 @@ Docker Compose establishment with all microservices on docker;
 *  Override Environment variables
 
 # Project Structure
+
 </br>
+
     ```
 src
 ├── ApiGateway
@@ -65,7 +67,9 @@ src
     ├── EAuction.Infrastructure
     └── EAuction.UI
     ```
+    
 </br>
+
 # 🚀 Building and Running for Production
 
 1. Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
