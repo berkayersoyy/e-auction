@@ -70,6 +70,14 @@ src
     
 </br>
 
+.
+├── ...
+├── test                    # Test files (alternatively `spec` or `tests`)
+│   ├── benchmarks          # Load and stress tests
+│   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+│   └── unit                # Unit tests
+└── ...
+
 # 🚀 Building and Running for Production
 
 1. Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
