@@ -80,4 +80,4 @@ src
 * Product API -> http://localhost:8000/swagger/index.html 
 * Sourcing API -> http://localhost:8001/swagger/index.html 
 * Order API -> http://localhost:8002/swagger/index.html 
-* API Gatewar -> http://localhost:5000/
+* API Gateway -> http://localhost:5000/
