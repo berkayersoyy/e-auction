@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using EAuction.Order.Domain.Entities.Base;
 
 namespace EAuction.Order.Domain.Entities

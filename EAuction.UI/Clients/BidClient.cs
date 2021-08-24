@@ -17,12 +17,12 @@ namespace EAuction.UI.Clients
         public BidClient(HttpClient client)
         {
             _client = client;
-            _client.BaseAddress = new Uri(CommonInfo.LocalAuctionBaseAdress);
+            _client.BaseAddress = new Uri(CommonInfo.BaseAdress);
         }
 
         public async Task<Result<List<BidViewModel>>> GetBidsByAuctionId(string id)
         {
-            var response = await _client.GetAsync("/api/v1/Bid/GetBidsByAuctionId?id=" + id);
+            var response = await _client.GetAsync("/Bid/GetBidsByAuctionId?id=" + id);
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
@@ -41,7 +41,7 @@ namespace EAuction.UI.Clients
             var dataAsString = JsonConvert.SerializeObject(model);
             var content = new StringContent(dataAsString);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var response = await _client.PostAsync("/api/v1/Bid", content);
+            var response = await _client.PostAsync("/Bid", content);
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();

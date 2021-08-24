@@ -53,7 +53,7 @@ namespace EAuction.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AuctionViewModel model)
         {
-            model.Status = 1;
+            model.Status = default(int);
             model.CreatedAt = DateTime.Now;
             var createAuction = await _auctionClient.CreateAuction(model);
             if (createAuction.IsSuccess)
@@ -83,6 +83,12 @@ namespace EAuction.UI.Controllers
             model.CreatedAt = DateTime.Now;
             var sendBidResponse = await _bidClient.SendBid(model);
             return sendBidResponse;
+        } 
+        [HttpPost]
+        public async Task<Result<string>> CompleteAuction(string id)
+        {
+            var completeAuctionResponse = await _auctionClient.CompleteAuction(id);
+            return completeAuctionResponse;
         }
     }
 }

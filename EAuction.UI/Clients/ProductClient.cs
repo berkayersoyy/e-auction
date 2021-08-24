@@ -17,12 +17,12 @@ namespace EAuction.UI.Clients
         public ProductClient(HttpClient client)
         {
             _client = client;
-            _client.BaseAddress = new Uri(CommonInfo.LocalProductBaseAdress);
+            _client.BaseAddress = new Uri(CommonInfo.BaseAdress);
         }
 
         public async Task<Result<List<ProductViewModel>>> GetProducts()
         {
-            var response = await _client.GetAsync("api/v1/Products");
+            var response = await _client.GetAsync("/Products");
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
