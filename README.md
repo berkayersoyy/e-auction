@@ -44,9 +44,7 @@ Docker Compose establishment with all microservices on docker;
 
 # Project Structure
 
-</br>
-
-    ```
+```
 src
 ├── ApiGateway
 |   └── EAuction.ApiGateway
@@ -66,17 +64,8 @@ src
     ├── EAuction.Core
     ├── EAuction.Infrastructure
     └── EAuction.UI
-    ```
+```
     
-</br>
-
-.
-├── ...
-├── test                    # Test files (alternatively `spec` or `tests`)
-│   ├── benchmarks          # Load and stress tests
-│   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
-│   └── unit                # Unit tests
-└── ...
 
 # 🚀 Building and Running for Production
 
