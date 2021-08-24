@@ -34,7 +34,14 @@ Order Microservice
 
 API Gateway Ocelot Microservice
 *  Implement API Gateways with Ocelot
+*  Sample microservices/containers to reroute through the API Gateways
+*  Run multiple different API Gateway container types
 
+Docker Compose establishment with all microservices on docker;
+*  Containerization of microservices
+*  Containerization of databases
+*  Override Environment variables
+*  
 # 🚀 Building and Running for Production
 
 1. Follow these steps to get your development environment set up: (Before Run Start the Docker Desktop)
