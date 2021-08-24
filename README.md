@@ -44,6 +44,7 @@ Docker Compose establishment with all microservices on docker;
 
 # Project Structure
 </br>
+    ```
 src
 ├── ApiGateway
 |   └── EAuction.ApiGateway
@@ -63,6 +64,7 @@ src
     ├── EAuction.Core
     ├── EAuction.Infrastructure
     └── EAuction.UI
+    ```
 </br>
 # 🚀 Building and Running for Production
 
