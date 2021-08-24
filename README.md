@@ -12,4 +12,4 @@ An auction application that I created with .Net 5 and microservices architecture
 
 2. At the root directory which include docker-compose.yml files, run below command:
 
-    docker-compose up -d --build
+        docker-compose up -d --build
