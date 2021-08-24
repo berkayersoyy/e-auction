@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EAuction.Core.Entities;
 using EAuction.UI.ViewModel;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +42,7 @@ namespace EAuction.UI.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password,false,false);
                     if (result.Succeeded)
                     {
+                        HttpContext.Session.SetString("IsAdmin",user.IsAdmin.ToString());
                         //return RedirectToAction("Index");
                         return LocalRedirect(returnUrl);
                     }

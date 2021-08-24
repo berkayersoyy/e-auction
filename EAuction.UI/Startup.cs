@@ -1,3 +1,4 @@
+using System;
 using EAuction.Core.Entities;
 using EAuction.Core.Repositories;
 using EAuction.Core.Repositories.Abstractions;
@@ -52,6 +53,10 @@ namespace EAuction.UI
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddMvc();
             services.AddRazorPages();
+            services.AddSession(opt =>
+            {
+                opt.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
             #endregion
 
             #region Dependencies
@@ -62,6 +67,7 @@ namespace EAuction.UI
             services.AddHttpClient();
             services.AddHttpClient<ProductClient>();
             services.AddHttpClient<AuctionClient>();
+            services.AddHttpClient<BidClient>();
 
             #endregion
         }
@@ -69,6 +75,8 @@ namespace EAuction.UI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSession();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

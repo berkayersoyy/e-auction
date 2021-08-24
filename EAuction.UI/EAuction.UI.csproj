@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\Views\RFQ\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
     <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
@@ -33,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\detail.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
   </ItemGroup>
 

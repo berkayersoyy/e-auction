@@ -86,7 +86,13 @@ namespace EAuction.Sourcing.Api
 
             #endregion
 
+            services.AddCors(o=>o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithOrigins("http://localhost:35186");
+            }));
+            
             services.AddSignalR();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,6 +108,8 @@ namespace EAuction.Sourcing.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
